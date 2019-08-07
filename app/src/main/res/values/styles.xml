@@ -31,7 +31,7 @@
         <item name="android:paddingRight">8dp</item>
         <item name="android:paddingBottom">4dp</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="CLIconImageView">
@@ -51,7 +51,7 @@
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="FileText" parent="ItemText" />
@@ -82,17 +82,17 @@
     <style name="ValidationText" parent="ItemText">
     </style>
     <style name="ValidationText.Master">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="ValidationText.Detail">
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="UserAction">
         <item name="android:layout_width">280dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textColor">@color/fg_uad_msg</item>
-        <item name="android:textSize">22dp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingLeft">@dimen/uad_component_padding_left</item>
         <item name="android:paddingRight">4dp</item>
@@ -101,7 +101,7 @@
     <style name="UserAction.Indicator">
         <item name="android:layout_width">@dimen/uad_component_edge</item>
         <item name="android:textColor">@color/fg_uad_indicator</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
