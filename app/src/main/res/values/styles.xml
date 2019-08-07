@@ -8,4 +8,104 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Fullscreen.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.Fullscreen.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Fullscreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- Base UI components style. -->
+    <style name="CLStatView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_rounded_alpha_grey</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="CLIconImageView">
+        <item name="android:layout_width">46dp</item>
+        <item name="android:layout_height">46dp</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:background">@drawable/bg_circle_alpha_grey</item>
+    </style>
+
+    <style name="ItemText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/black_alpha</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="FileText" parent="ItemText" />
+    <style name="FileName" parent="FileText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="FileSize" parent="FileText">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="FileResolution" parent="FileText" />
+    <style name="FileHighlightBorder">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/border_highlight</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="FaceName" parent="ItemText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ValidationText" parent="ItemText">
+    </style>
+    <style name="ValidationText.Master">
+        <item name="android:textSize">20dp</item>
+    </style>
+    <style name="ValidationText.Detail">
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="UserAction">
+        <item name="android:layout_width">280dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/fg_uad_msg</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/uad_component_padding_left</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:background">@drawable/bg_uad_msg</item>
+    </style>
+    <style name="UserAction.Indicator">
+        <item name="android:layout_width">@dimen/uad_component_edge</item>
+        <item name="android:textColor">@color/fg_uad_indicator</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:background">@drawable/bg_uad_indicator</item>
+    </style>
+
 </resources>

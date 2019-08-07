@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:background="@drawable/bg_rounded_grey"
+    android:orientation="vertical"
+>
+    <LinearLayout
+        android:id="@+id/layoutTestRound"
+        android:layout_width="280dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/OptionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Round:" />
+
+        <ImageView
+            android:id="@+id/btnDecTestRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:src="@drawable/ic_remove" />
+
+        <TextView
+            android:id="@+id/txtTestRound"
+            style="@style/OptionTitle"
+            android:layout_width="wrap_content"
+            android:minWidth="100dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="1" />
+
+        <ImageView
+            android:id="@+id/btnIncTestRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:src="@drawable/ic_add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtProgressBarTitle"
+        style="@style/OptionTitle"
+        android:layout_width="280dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:text="Benchmark is in progress..."
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutProgressRound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <ProgressBar
+            android:id="@+id/progressRound"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:max="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:progress="1" />
+
+        <TextView
+            android:id="@+id/txtProgressRound"
+            style="@style/OptionDesc"
+            android:layout_width="48dp"
+            android:gravity="end"
+
+            android:text="0%"
+            app:layout_constraintBottom_toTopOf="@id/progressRound"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="100%" />
+        <TextView
+            android:id="@+id/txtRoundItem"
+            style="@style/OptionDesc"
+            android:layout_width="0dp"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            app:layout_constraintBottom_toTopOf="@id/progressRound"
+            app:layout_constraintRight_toLeftOf="@id/txtProgressRound"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2/3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <ProgressBar
+            android:id="@+id/progressTest"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:max="100"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:progress="100" />
+
+        <TextView
+            android:id="@+id/txtTestProgress"
+            style="@style/OptionDesc"
+            android:layout_width="48dp"
+            android:gravity="right"
+            android:text="0%"
+            app:layout_constraintBottom_toTopOf="@id/progressTest"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="100%" />
+        <TextView
+            android:id="@+id/txtTestItem"
+            style="@style/OptionDesc"
+            android:layout_width="0dp"
+            android:singleLine="true"
+            android:ellipsize="middle"
+            app:layout_constraintBottom_toTopOf="@id/progressTest"
+            app:layout_constraintRight_toLeftOf="@id/txtTestProgress"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="FaceMe/Benchmark/1280x720/01.Enya/frame_91_1531367403.jpg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+        <TextView
+            android:id="@+id/btnTestClose"
+            style="@style/OptionButton"
+            android:layout_alignParentRight="true"
+            android:text="CLOSE" />
+        <TextView
+            android:id="@+id/btnTestStart"
+            style="@style/OptionButton"
+            android:layout_toLeftOf="@id/btnTestClose"
+            android:text="START" />
+
+        <TextView
+            android:id="@+id/btnTestCancel"
+            style="@style/OptionButton"
+            android:layout_alignParentRight="true"
+            android:text="CANCEL"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>
