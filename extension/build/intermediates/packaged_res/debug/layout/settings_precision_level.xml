@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout style="@style/OptionLeft">
+        <TextView
+            style="@style/OptionTitle"
+            android:text="Precision Level" />
+        <TextView
+            style="@style/OptionDesc"
+            android:text="False Accept Rate, (@FAR)" />
+        <RadioGroup
+            android:id="@+id/radioPrecisionLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <RadioButton
+                android:id="@+id/radioPrecisionLevel6"
+                style="@style/OptionValue"
+                android:checked="true"
+                android:tag="0"
+                android:text="1e-6, 10^-6, 0.0001&#37;"/>
+            <RadioButton
+                android:id="@+id/radioPrecisionLevel5"
+                style="@style/OptionValue"
+                android:tag="1"
+                android:text="1e-5, 10^-5, 0.001&#37;"/>
+            <RadioButton
+                android:id="@+id/radioPrecisionLevel4"
+                style="@style/OptionValue"
+                android:tag="2"
+                android:text="1e-4, 10^-4, 0.01&#37;"/>
+            <RadioButton
+                android:id="@+id/radioPrecisionLevel3"
+                style="@style/OptionValue"
+                android:tag="3"
+                android:text="1e-3, 10^-3, 0.1&#37;"/>
+            <RadioButton
+                android:id="@+id/radioPrecisionLevel2"
+                style="@style/OptionValue"
+                android:tag="4"
+                android:text="1e-2, 10^-2, 1&#37;"/>
+        </RadioGroup>
+    </LinearLayout>
+</merge>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="control_background">#cc4285f4</color>
+
+    <color name="app_background">#2C2C2C</color>
+
+    <color name="item_selected">#AA3F51B5</color>
+    <color name="item_pressed">#AAFF4081</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#808080</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#0099CC</color>
+    <color name="green">#33CC33</color>
+    <color name="yellow">#DCDC00</color>
+
+    <color name="noname_border">#CCCCCC</color>
+    <color name="noname_corner_border">#66CCCCCC</color>
+    <color name="named_border">#00FF00</color>
+    <color name="named_corner_border">#6600FF00</color>
+
+    <color name="auto_named_border">#E6E600</color>
+    <color name="auto_named_corner_border">#66E6E600</color>
+
+    <color name="male_border">#0099CC</color>
+    <color name="male_corner_border">#660099CC</color>
+    <color name="female_border">#FF69B4</color>
+    <color name="female_corner_border">#66FF69B4</color>
+
+    <color name="face_label_bg">#C0000000</color>
+    <color name="landmark_border">#CCFFFFFF</color>
+    <color name="listview_divider">#26f0f0f0</color>
+
+</resources>

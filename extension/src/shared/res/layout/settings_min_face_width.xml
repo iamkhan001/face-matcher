@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout style="@style/OptionLeft">
+        <TextView
+            style="@style/OptionTitle"
+            android:text="minFaceWidth" />
+        <TextView
+            style="@style/OptionDesc"
+            android:text="Minimum image width of face that recognizer will process." />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp">
+            <TextView
+                android:id="@+id/txtMinFaceWidth"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                style="@style/OptionValue"
+                tools:text="40"/>
+            <ImageView
+                android:id="@+id/btnAddMinFaceWidth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_toLeftOf="@id/txtMinFaceWidth"
+                android:src="@drawable/ic_add" />
+            <ImageView
+                android:id="@+id/btnRemoveMinFaceWidth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_remove" />
+            <SeekBar
+                android:id="@+id/seekbarMinFaceWidth"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/btnAddMinFaceWidth"
+                android:layout_toRightOf="@id/btnRemoveMinFaceWidth"
+                android:max="640"
+                android:progress="40" />
+        </RelativeLayout>
+    </LinearLayout>
+</merge>

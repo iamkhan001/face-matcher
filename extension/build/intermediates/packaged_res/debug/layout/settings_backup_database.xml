@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout style="@style/OptionLeft">
+        <TextView
+            style="@style/OptionTitle"
+            android:text="Faces database" />
+        <TextView
+            style="@style/OptionDesc"
+            android:text="Export faces database to storage named /FaceMe/faceMe_out.fdb. Or import it from /FaceMe/faceMe.fdb. It need to restart app process after operations." />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <Button
+                android:id="@+id/btnFaceDbImport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Import"/>
+            <Button
+                android:id="@+id/btnFaceDbExport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Export"/>
+        </LinearLayout>
+    </LinearLayout>
+</merge>

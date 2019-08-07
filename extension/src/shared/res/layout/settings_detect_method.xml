@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout style="@style/OptionLeft">
+        <TextView
+            style="@style/OptionTitle"
+            android:text="Detection Algorithm" />
+        <TextView
+            style="@style/OptionDesc"
+            android:text="Choose different algorithm for precision or performance." />
+        <RadioGroup
+            android:id="@+id/radioDetectMethod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <RadioButton
+                android:id="@+id/radioDetectMethodPrecise"
+                style="@style/OptionValue"
+                android:tag="0"
+                android:text="DNN (more precise)"/>
+            <RadioButton
+                android:id="@+id/radioDetectMethodFast"
+                style="@style/OptionValue"
+                android:tag="4"
+                android:text="Non-DNN (faster)"/>
+        </RadioGroup>
+    </LinearLayout>
+</merge>

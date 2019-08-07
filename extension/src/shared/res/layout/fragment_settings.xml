@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_rounded_alpha_grey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/OptionTitle"
+            android:layout_width="match_parent"
+            android:id="@+id/txtSdkVersion"
+            android:text="@string/app_name"/>
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_min_face_width" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_fast_detection" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_detect_method" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_extract_model" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_precision_level" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_detect_speed_level" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_engine_threads" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_landmark" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_features" />
+
+        <View style="@style/OptionSeparator" />
+        <include layout="@layout/settings_backup_database" />
+
+    </LinearLayout>
+</ScrollView>

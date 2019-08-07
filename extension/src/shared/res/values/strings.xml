@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<resources>
+    <string name="app_name">FaceMe&#8482;</string>
+    <string name="ext_launcher_no_camera_available">No camera available.</string>
+    <string name="ext_permission_fail">You need to allow access to %1$s. You can grant access in Privacy Settings.</string>
+</resources>

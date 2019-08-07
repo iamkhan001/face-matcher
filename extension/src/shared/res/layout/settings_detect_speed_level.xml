@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout style="@style/OptionLeft">
+        <TextView
+            style="@style/OptionTitle"
+            android:text="Detect Speed Level" />
+        <TextView
+            style="@style/OptionDesc"
+            android:text="Desired performance for detection speed." />
+        <RadioGroup
+            android:id="@+id/radioDetectSpeedLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <RadioButton
+                android:id="@+id/radioDetectSpeedLevelFast"
+                style="@style/OptionValue"
+                android:tag="0"
+                android:text="Fast"/>
+            <RadioButton
+                android:id="@+id/radioDetectSpeedLevelBalance"
+                style="@style/OptionValue"
+                android:checked="true"
+                android:tag="1"
+                android:text="Balance"/>
+            <RadioButton
+                android:id="@+id/radioDetectSpeedLevelPrecise"
+                style="@style/OptionValue"
+                android:tag="2"
+                android:text="Precise"/>
+        </RadioGroup>
+    </LinearLayout>
+</merge>

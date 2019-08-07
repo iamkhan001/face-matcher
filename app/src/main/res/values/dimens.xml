@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+
+    <!-- Semantic definitions -->
+
+    <dimen name="horizontal_page_margin">@dimen/margin_medium</dimen>
+    <dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="face_thumbnail_size">58dp</dimen>
+    <dimen name="face_list_width">64dp</dimen>
+    <dimen name="face_border_width">2dp</dimen>
+    <dimen name="face_attr_default_text_size">14dp</dimen>
+    <dimen name="face_attr_min_text_size">6dp</dimen>
+    <dimen name="face_attr_padding">4dp</dimen>
+    <dimen name="landmark_width">1.5dp</dimen>
+    <dimen name="landmark_radius">3dp</dimen>
+
+    <dimen name="uad_component_edge">60dp</dimen>
+    <dimen name="uad_component_padding_left">66dp</dimen>
+    <dimen name="uad_component_margin_bottom">60dp</dimen>
+
+</resources>

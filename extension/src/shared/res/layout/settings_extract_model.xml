@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout style="@style/OptionLeft">
+        <TextView
+            style="@style/OptionTitle"
+            android:text="Recognition Algorithm" />
+        <TextView
+            style="@style/OptionDesc"
+            android:text="Choose different algorithm to extract face features. Extracted face features cannot be compared among different algorithm.
+NOTE: H2 and S80 are the experimental features and we don't guarantee its result currently." />
+        <RadioGroup
+            android:id="@+id/radioExtractModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+            <RadioButton
+                android:id="@+id/radioExtractModelH1"
+                style="@style/OptionValue"
+                android:tag="2"
+                android:text="High Precision (H1)"/>
+            <RadioButton
+                android:id="@+id/radioExtractModelH2"
+                style="@style/OptionValue"
+                android:tag="4"
+                android:text="High Precision (H2)(*)"/>
+            <RadioButton
+                android:id="@+id/radioExtractModelS80"
+                style="@style/OptionValue"
+                android:tag="1"
+                android:text="Standard Precision (S80)(*)"/>
+        </RadioGroup>
+    </LinearLayout>
+</merge>

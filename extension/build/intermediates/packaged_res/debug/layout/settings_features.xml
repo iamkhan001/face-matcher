@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+
+  CyberLink FaceMe (R) SDK
+  Copyright (C) 2018 CyberLink Corp. All rights reserved.
+  https://www.cyberlink.com
+-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Switch
+            android:id="@+id/btnFeatures"
+            style="@style/CLSwitch"/>
+        <LinearLayout
+            style="@style/OptionLeft"
+            android:layout_toLeftOf="@id/btnFeatures">
+            <TextView
+                style="@style/OptionTitle"
+                android:text="Features" />
+            <TextView
+                style="@style/OptionDesc"
+                android:text="Show features listed below." />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/layoutFeatureSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Switch
+                android:id="@+id/btnAge"
+                style="@style/CLSwitch"/>
+            <LinearLayout
+                style="@style/OptionLeft"
+                android:layout_toLeftOf="@id/btnAge">
+                <TextView
+                    style="@style/OptionTitle"
+                    android:text="Age" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutAgeRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Switch
+                android:id="@+id/btnAgeRange"
+                style="@style/CLSwitch"/>
+            <LinearLayout
+                style="@style/OptionLeft"
+                android:layout_toLeftOf="@id/btnAgeRange">
+                <TextView
+                    style="@style/OptionTitle"
+                    android:text="Age in range" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Switch
+                android:id="@+id/btnGender"
+                style="@style/CLSwitch"/>
+            <LinearLayout
+                style="@style/OptionLeft"
+                android:layout_toLeftOf="@id/btnGender">
+                <TextView
+                    style="@style/OptionTitle"
+                    android:text="Gender" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Switch
+                android:id="@+id/btnEmotion"
+                style="@style/CLSwitch"/>
+            <LinearLayout
+                style="@style/OptionLeft"
+                android:layout_toLeftOf="@id/btnEmotion">
+                <TextView
+                    style="@style/OptionTitle"
+                    android:text="Emotion" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Switch
+                android:id="@+id/btnPose"
+                style="@style/CLSwitch"/>
+            <LinearLayout
+                style="@style/OptionLeft"
+                android:layout_toLeftOf="@id/btnPose">
+                <TextView
+                    style="@style/OptionTitle"
+                    android:text="Pose" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</merge>
