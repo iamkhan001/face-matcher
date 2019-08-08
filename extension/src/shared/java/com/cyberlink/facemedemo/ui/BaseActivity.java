@@ -37,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Settings
         super.onCreate(savedInstanceState);
         setContentView(getContentLayout());
 
+
         uiSettings = new UiSettings(this);
         // Request necessary permission.
         requestPermissionsIfNeeded();
@@ -139,4 +140,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Settings
     public final UiSettings getUiSettings() {
         return uiSettings;
     }
+
+
 }

@@ -11,10 +11,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Environment;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
+import com.cyberlink.faceme.LicenseManager;
+import com.cyberlink.facemedemo.data.Config;
 import com.cyberlink.facemedemo.util.Callback;
 
 import java.io.ByteArrayOutputStream;
@@ -58,7 +61,10 @@ public class LicenseInfoHandler {
             return;
         }
 
-        askUserInput(context, callback);
+        //askUserInput(context, callback);
+
+        registerLicense(context);
+
     }
 
     private static byte[] readFromFile() {
@@ -124,5 +130,13 @@ public class LicenseInfoHandler {
                     CLToast.show(context, "You must have a valid API key to use FaceMe SDK");
                 })
                 .show();
+    }
+
+    private static void registerLicense(Context context) {
+        LicenseManager licenseManager = new LicenseManager(context);
+        boolean isRegistered = licenseManager.initialize(Config.API_KEY);
+        int result = licenseManager.registerLicense();
+        Log.e("LicenseManager","Result "+isRegistered+" >> "+result);
+
     }
 }

@@ -26,11 +26,18 @@ import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 
+import com.cyberlink.faceme.DetectionModelSpeedLevel;
+import com.cyberlink.faceme.EnginePreference;
+import com.cyberlink.faceme.ExtractConfig;
+import com.cyberlink.faceme.ExtractionModelSpeedLevel;
+import com.cyberlink.faceme.FaceMeRecognizer;
+import com.cyberlink.faceme.LicenseManager;
 import com.cyberlink.facemedemo.camera.CameraController;
 import com.cyberlink.facemedemo.camera.CameraFactory;
 import com.cyberlink.facemedemo.camera.StatListener;
@@ -42,6 +49,7 @@ import com.cyberlink.facemedemo.ui.AutoFitTextureView;
 import com.cyberlink.facemedemo.ui.BaseActivity;
 import com.cyberlink.facemedemo.ui.CLToast;
 import com.mirobotic.facematcher.R;
+import com.mirobotic.facematcher.app.Config;
 import com.mirobotic.facematcher.sdk.camerastream.RecognitionHandler;
 import com.mirobotic.facematcher.sdk.camerastream.ResolutionFragment;
 import com.mirobotic.facematcher.view.FaceView;
@@ -421,6 +429,7 @@ public class CameraActivity extends BaseActivity implements
     public interface OnRecognitionHandlerReady{
         void setOnSavedFaceListener(FaceMeRecognizerWrapper.OnSavedFaceListener listener);
     }
+
 
 
 
