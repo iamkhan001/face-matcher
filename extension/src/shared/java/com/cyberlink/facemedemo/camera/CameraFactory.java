@@ -19,7 +19,7 @@ public class CameraFactory {
     private static final boolean FORCE_CAMERA_1 = true;
 
     public static CameraController create(Activity activity, AutoFitTextureView textureView, CameraController.Callback callback, StatListener listener) {
-        if (FORCE_CAMERA_1 || Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+        if (FORCE_CAMERA_1) {
             return new CameraV17(activity, textureView, callback, listener);
         } else {
             return new CameraV21(activity, textureView, callback, listener);

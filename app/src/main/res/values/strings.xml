@@ -17,4 +17,6 @@
         ]]>
     </string>
 
+    <string name="permission_fail">You need to allow access to %1$s. You can grant access in Privacy Settings.</string>
+
 </resources>

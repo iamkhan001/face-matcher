@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imageGridItem"
+    android:background="@color/black_alpha"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_width="180dp"
+    tools:layout_height="180dp"
+    tools:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/imgFileThumb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <TextView
+        android:id="@+id/txtFileResolution"
+        style="@style/FileResolution"
+        app:layout_constraintTop_toTopOf="@id/imgFileThumb"
+        app:layout_constraintRight_toRightOf="@id/imgFileThumb"
+        tools:text="1920x1080" />
+    <TextView
+        android:id="@+id/txtFileSize"
+        style="@style/FileSize"
+        app:layout_constraintBottom_toBottomOf="@id/txtFileName"
+        app:layout_constraintRight_toRightOf="@id/imgFileThumb"
+        app:layout_constraintTop_toTopOf="@+id/txtFileName"
+        tools:text="123KB" />
+    <TextView
+        android:id="@+id/txtFileName"
+        style="@style/FileName"
+        app:layout_constraintBottom_toBottomOf="@id/imgFileThumb"
+        app:layout_constraintLeft_toLeftOf="@id/imgFileThumb"
+        app:layout_constraintRight_toLeftOf="@id/txtFileSize"
+        tools:text="20181225_123456.jpg" />
+
+    <View
+        android:id="@+id/imgFileHighlightBorder"
+        style="@style/FileHighlightBorder"
+        app:layout_constraintTop_toTopOf="@id/imgFileThumb"
+        app:layout_constraintBottom_toBottomOf="@id/imgFileThumb"
+        app:layout_constraintLeft_toLeftOf="@id/imgFileThumb"
+        app:layout_constraintRight_toRightOf="@id/imgFileThumb"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -584,6 +584,8 @@ drawable ic_remove
 drawable ic_remove_d
 drawable ic_remove_n
 drawable ic_remove_p
+drawable img_face_1
+drawable img_face_2
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low

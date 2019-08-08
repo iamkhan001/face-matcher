@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/face_list_width"
+    android:layout_height="@dimen/face_list_width"
+    android:padding="@dimen/face_border_width"
+    android:background="@drawable/bg_face_item">
+
+    <ImageView
+        android:id="@+id/faceThumb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/faceName"
+        style="@style/FaceName"
+        android:layout_alignParentBottom="true"
+        tools:text="Steve Jobs" />
+    <TextView
+        android:id="@+id/faceId"
+        style="@style/ItemText"
+        android:layout_alignParentEnd="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>
