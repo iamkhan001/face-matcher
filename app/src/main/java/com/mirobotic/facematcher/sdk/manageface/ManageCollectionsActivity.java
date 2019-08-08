@@ -1,10 +1,4 @@
-/*
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
- *
- * CyberLink FaceMe (R) SDK
- * Copyright (C) 2018 CyberLink Corp. All rights reserved.
- * https://www.cyberlink.com
- */
+
 package com.mirobotic.facematcher.sdk.manageface;
 
 import android.Manifest;
@@ -16,18 +10,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.cyberlink.facemedemo.ui.BaseActivity;
 import com.cyberlink.facemedemo.ui.CLToast;
 import com.mirobotic.facematcher.R;
-
 import java.util.ArrayList;
+
 
 public class ManageCollectionsActivity extends BaseActivity implements IManageCollectionListener, ManageHandler.ManageFaceHandlerCallback, IFetchFaceThumbnail {
     private static final String TAG = "ManageCollectionsActivity";

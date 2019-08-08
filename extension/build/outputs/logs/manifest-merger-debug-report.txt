@@ -1,19 +1,19 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml:1:1-2:52
-INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml:1:1-2:52
-INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml:1:1-2:52
+ADDED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml:1:1-2:52
+INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml:1:1-2:52
+INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml:1:1-2:52
 	package
-		ADDED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml:2:5-49
-		INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
-		INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
+		ADDED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml:2:5-49
+		INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml
+		INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml:1:11-69
+		ADDED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml:1:11-69
 uses-sdk
-INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
-INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
+INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml
+INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
-		ADDED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
-		INJECTED from E:\Robo\FaceMatcher\extension\src\main\AndroidManifest.xml
+		INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml
+		ADDED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml
+		INJECTED from /home/imran/projects/FaceMatcher/extension/src/main/AndroidManifest.xml

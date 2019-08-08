@@ -14,19 +14,6 @@
         android:layout_alignParentTop="true"
         tools:ignore="RelativeOverlap" />
 
-    <ImageView
-        android:id="@+id/icWatermarkBL"
-        android:layout_width="110.75dp"
-        android:layout_height="30.25dp"
-        android:layout_alignStart="@id/cameraPreviewView"
-        android:layout_alignBottom="@id/cameraPreviewView" />
-    <ImageView
-        android:id="@+id/icWatermarkTR"
-        android:layout_width="125dp"
-        android:layout_height="47.25dp"
-        android:layout_alignEnd="@id/cameraPreviewView"
-        android:layout_alignTop="@id/cameraPreviewView" />
-
     <com.mirobotic.facematcher.view.FaceView
         android:id="@+id/faceView"
         android:layout_width="match_parent"
@@ -56,79 +43,6 @@
         android:layout_marginEnd="-6dp"
         android:alpha="0" />
 
-    <!-- Bottom Right -->
-    <ImageView
-        android:id="@+id/btnSettings"
-        style="@style/CLIconImageView"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/faceList"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_settings" />
-    <ImageView
-        android:id="@+id/btnUserAction"
-        style="@style/CLIconImageView"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/btnSettings"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_anti_user" />
-    <ImageView
-        android:id="@+id/btnAutoAddFace"
-        style="@style/CLIconImageView"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/btnUserAction"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_auto_add" />
-
-    <!-- Bottom Left -->
-    <ImageView
-        android:id="@+id/btnFaces"
-        style="@style/CLIconImageView"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/faceList"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/ic_face" />
-
-    <ImageView
-        android:id="@+id/btnInfo"
-        style="@style/CLIconImageView"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/faceList"
-        android:layout_toEndOf="@id/btnFaces"
-        android:src="@drawable/ic_info" />
-
-    <ImageView
-        android:id="@+id/btnScanFolder"
-        style="@style/CLIconImageView"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/faceList"
-        android:layout_toEndOf="@id/btnInfo"
-        android:src="@drawable/ic_benchmark" />
-
-    <ImageView
-        android:id="@+id/btnValidation"
-        style="@style/CLIconImageView"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/faceList"
-        android:layout_toEndOf="@id/btnScanFolder"
-        android:src="@drawable/ic_validate" />
-
-    <ImageView
-        android:id="@+id/btManageFaces"
-        style="@style/CLIconImageView"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="12dp"
-        android:layout_above="@id/faceList"
-        android:layout_toEndOf="@id/btnValidation"
-        android:src="@drawable/ic_managa_face" />
 
     <!-- Top Right -->
     <LinearLayout
@@ -138,27 +52,6 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/btnScreenRotation"
-            style="@style/CLIconImageView"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_screen_rotation" />
-
-        <ImageView
-            android:id="@+id/btnResolution"
-            style="@style/CLIconImageView"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_resolution" />
-
-        <ImageView
-            android:id="@+id/btnRotate"
-            style="@style/CLIconImageView"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/ic_arrow_auto" />
 
         <ImageSwitcher
             android:id="@+id/btnCamera"
@@ -191,8 +84,8 @@
         android:id="@+id/layoutUserInteraction"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/uad_component_edge"
-        android:layout_alignStart="@id/cameraPreviewView"
-        android:layout_alignEnd="@id/cameraPreviewView"
+        android:layout_alignLeft="@id/cameraPreviewView"
+        android:layout_alignRight="@id/cameraPreviewView"
         android:layout_marginBottom="@dimen/uad_component_margin_bottom"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
@@ -205,7 +98,7 @@
         <TextView
             android:id="@+id/txtUserActionIndicator"
             style="@style/UserAction.Indicator"
-            android:layout_alignStart="@id/txtUserActionMessage"
+            android:layout_alignLeft="@id/txtUserActionMessage"
             tools:text="O"/>
     </RelativeLayout>
 

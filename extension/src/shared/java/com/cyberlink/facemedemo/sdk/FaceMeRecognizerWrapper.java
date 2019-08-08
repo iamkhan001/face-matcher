@@ -9,6 +9,7 @@ package com.cyberlink.facemedemo.sdk;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.Log;
 import android.util.Size;
@@ -27,6 +28,7 @@ import com.cyberlink.faceme.FaceInfo;
 import com.cyberlink.faceme.FaceLandmark;
 import com.cyberlink.faceme.FaceMeRecognizer;
 import com.cyberlink.faceme.LicenseManager;
+import com.cyberlink.facemedemo.extension.R;
 import com.cyberlink.facemedemo.ui.LicenseInfoHandler;
 import com.cyberlink.facemedemo.ui.UiSettings;
 
@@ -47,11 +49,15 @@ public class FaceMeRecognizerWrapper {
     private final ExtractConfig extractConfig;
     private final boolean cropFaceBitmap;
 
+    private final float thr = 0.80f;
+
     private FaceMeRecognizer recognizer = null;
     private FaceFeatureScheme featureScheme;
     private OnExtractedListener onExtractedListener = new OnExtractedListener() {};
 
     private final ArrayList<FaceHolder> faceHolders = new ArrayList<>();
+
+    private List<FaceFeature> features;
 
     public FaceMeRecognizerWrapper(Context context) {
         this(context, false);
@@ -66,6 +72,44 @@ public class FaceMeRecognizerWrapper {
         this.extractConfig.extractBoundingBox = true;
 
         this.cropFaceBitmap = cropFaceBitmap;
+
+        features = new ArrayList<>();
+
+    }
+
+    private void decodeSavedFaces() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<Bitmap> checkList = new ArrayList<>();
+                checkList.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.img_face_1));
+                checkList.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.img_face_2));
+
+
+                for (Bitmap bitmap:checkList){
+
+                    if (recognizer == null) {
+                        Log.e(TAG, "extractFace but didn't initialize yet");
+                        return;
+                    }
+
+                    faceHolders.clear();
+                    int facesCount = recognizer.extractFace(extractConfig, Collections.singletonList(bitmap));
+
+                    if (facesCount > 0) {
+                        for (int faceIndex = 0; faceIndex < facesCount; faceIndex++) {
+                            FaceFeature faceFeature = recognizer.getFaceFeature(0, faceIndex);
+                            FaceAttribute faceAttr = recognizer.getFaceAttribute(0, faceIndex);
+                            features.add(faceFeature);
+                            Log.e(TAG,faceIndex+" >> age "+faceAttr.age+" | gender "+faceAttr.gender+" | emotion "+faceAttr.emotion);
+                        }
+                    }
+
+                    Log.e(TAG,"SAVED FACES >> "+features.size());
+                }
+            }
+        }).start();
+
     }
 
     public void setOnExtractedListener(@NonNull OnExtractedListener onExtractedListener) {
@@ -114,6 +158,8 @@ public class FaceMeRecognizerWrapper {
 
             featureScheme = recognizer.getFeatureScheme();
             if (featureScheme == null) throw new IllegalStateException("Get feature scheme failed");
+
+            decodeSavedFaces();
 
             Log.i(TAG, "Confidence threshold list");
             Log.i(TAG, " > 1e-6: " + featureScheme.threshold_1_1e6);
@@ -201,6 +247,20 @@ public class FaceMeRecognizerWrapper {
                         Log.v(TAG, "   [" + faceIndex + "] Bitmap face took " + duration + "ms");
                     }
                 }
+
+                for (int f=0;f<features.size();f++){
+                    float c = compareFaceFeature(features.get(f),faceFeature);
+                    Log.e(TAG, "face ["+faceIndex+ "] feature ["+f+"] >> result >> "+c);
+
+                    if (c > thr){
+                        Log.d(TAG,"Face Result "+f);
+                        break;
+                    }
+
+                }
+
+
+
                 FaceHolder holder = new FaceHolder(faceInfo, faceLandmark, faceAttr, faceFeature, faceBitmap);
                 faceHolders.add(holder);
             }
