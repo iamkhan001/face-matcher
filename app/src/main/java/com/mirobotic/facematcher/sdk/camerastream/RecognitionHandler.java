@@ -27,17 +27,18 @@ import com.cyberlink.facemedemo.ui.CLToast;
 import com.cyberlink.facemedemo.ui.LicenseInfoHandler;
 import com.cyberlink.facemedemo.ui.UiSettings;
 import com.cyberlink.facemedemo.util.BmpUtil;
+import com.mirobotic.facematcher.ui.activities.CameraActivity;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-class RecognitionHandler {
+public class RecognitionHandler  {
     private static final String TAG = "RecognitionHandler";
     private static final int FACE_THUMBNAIL_SIZE  = 96;
 
-    interface RecognizeListener {
+    public interface RecognizeListener {
         void onRecognized(int width, int height, List<FaceHolder> faces);
     }
 
@@ -56,14 +57,22 @@ class RecognitionHandler {
 
     private FaceMeRecognizerWrapper faceMeRecognizer = null;
     private FaceMeDataManager faceMeDataManager = null;
+    private CameraActivity.OnRecognitionHandlerReady onRecognitionHandlerReady;
+    private FaceMeRecognizerWrapper.OnFaceDetect onFaceDetect;
 
-    RecognitionHandler(Context context, UiSettings uiSettings, StatListener statListener,
-                       RecognizeListener recognizeListener, OnExtractedListener extractListener) {
+
+
+    public RecognitionHandler(Context context, UiSettings uiSettings, StatListener statListener,
+                              RecognizeListener recognizeListener, OnExtractedListener extractListener,
+                              CameraActivity.OnRecognitionHandlerReady onRecognitionHandlerReady,
+                              FaceMeRecognizerWrapper.OnFaceDetect onFaceDetect) {
         this.context = context;
         this.uiSettings = uiSettings;
         this.statListener = statListener;
         this.recognizeListener = recognizeListener;
         this.extractListener = extractListener;
+        this.onRecognitionHandlerReady = onRecognitionHandlerReady;
+        this.onFaceDetect = onFaceDetect;
 
         HandlerThread thread = new HandlerThread(TAG);
         thread.start();
@@ -71,6 +80,7 @@ class RecognitionHandler {
         this.mainHandler = new Handler(Looper.getMainLooper());
 
         this.faceExtraHandler = FaceExtraHandler.Factory.create(context);
+
     }
 
     @WorkerThread
@@ -133,7 +143,7 @@ class RecognitionHandler {
         Log.d(TAG, " > recognize took " + (System.currentTimeMillis() - start) + "ms");
     }
 
-    void applySettings(boolean needRebuild) {
+    public void applySettings(boolean needRebuild) {
         LicenseInfoHandler.getLicenseInfo(context, (licenseInfo) -> recognitionHandler.post(() -> {
             if (needRebuild) releaseEngine();
             if (faceMeRecognizer == null) initEngine();
@@ -142,6 +152,13 @@ class RecognitionHandler {
                 faceMeRecognizer.configure();
             }
         }));
+    }
+
+    public FaceMeRecognizerWrapper.OnSavedFaceListener getOnSavedFaceListener(){
+        if (faceMeRecognizer!=null){
+            return faceMeRecognizer.getOnSavedFaceListener();
+        }
+        return null;
     }
 
     @WorkerThread
@@ -172,6 +189,11 @@ class RecognitionHandler {
             faceExtraHandler.setFaceMeRecognizer(faceMeRecognizer.get());
             faceExtraHandler.setFaceMeDataManager(faceMeDataManager);
 
+
+            onRecognitionHandlerReady.setOnSavedFaceListener(faceMeRecognizer.getOnSavedFaceListener());
+
+            faceMeRecognizer.setOnFaceDetect(onFaceDetect);
+
             Log.v(TAG, " > initEngine took " + (System.currentTimeMillis() - start) + "ms");
         } catch (Exception e) {
             Log.e(TAG, "Cannot setup FaceMe components", e);
@@ -193,20 +215,20 @@ class RecognitionHandler {
         }
     }
 
-    boolean isRecognizing() {
+    public boolean isRecognizing() {
         return this.isRecognizing.get();
     }
 
-    void onResume() {
+    public void onResume() {
         applySettings(true);
     }
 
-    void onPause() {
+    public void onPause() {
         recognitionHandler.removeCallbacksAndMessages(null);
         recognitionHandler.post(this::releaseEngine);
     }
 
-    void onBitmap(Bitmap newBitmap) {
+    public void onBitmap(Bitmap newBitmap) {
         if (isRecognizing.get()) {
             newBitmap.recycle();
             return;
@@ -219,7 +241,7 @@ class RecognitionHandler {
         recognitionHandler.post(this::recognizeBitmap);
     }
 
-    void onRelease() {
+    public void onRelease() {
         recognitionHandler.removeCallbacksAndMessages(null);
         recognitionHandler.post(() -> {
             releaseEngine();
@@ -267,7 +289,7 @@ class RecognitionHandler {
         faceHolder.data.confidence = 1F;
     }
 
-    void removeFace(FaceHolder faceHolder) {
+    public void removeFace(FaceHolder faceHolder) {
         Log.d(TAG, "removeFace");
         FaceMeDataManager dataManager = faceMeDataManager;
         if (dataManager == null) {

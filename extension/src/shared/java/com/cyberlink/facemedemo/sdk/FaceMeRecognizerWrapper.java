@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.Log;
 import android.util.Size;
+import android.widget.Toast;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.cyberlink.faceme.FaceInfo;
 import com.cyberlink.faceme.FaceLandmark;
 import com.cyberlink.faceme.FaceMeRecognizer;
 import com.cyberlink.faceme.LicenseManager;
+import com.cyberlink.facemedemo.data.SavedFace;
 import com.cyberlink.facemedemo.extension.R;
 import com.cyberlink.facemedemo.ui.LicenseInfoHandler;
 import com.cyberlink.facemedemo.ui.UiSettings;
@@ -57,7 +59,36 @@ public class FaceMeRecognizerWrapper {
 
     private final ArrayList<FaceHolder> faceHolders = new ArrayList<>();
 
-    private List<FaceFeature> features;
+    private ArrayList<SavedFace> savedFaces;
+    private OnFaceDetect onFaceDetect;
+
+    private OnSavedFaceListener onSavedFaceListener = new OnSavedFaceListener() {
+        @Override
+        public void setSavedFaces(ArrayList<SavedFace> faces) {
+            savedFaces = faces;
+            decodeSavedFaces();
+        }
+
+        @Override
+        public ArrayList<SavedFace> getSavedFaces() {
+            return savedFaces;
+        }
+
+        @Override
+        public void addFace(SavedFace face) {
+            savedFaces.add(face);
+        }
+
+        @Override
+        public void removeFace(int index) {
+            savedFaces.remove(index);
+        }
+    };
+
+    public OnSavedFaceListener getOnSavedFaceListener() {
+        return onSavedFaceListener;
+    }
+
 
     public FaceMeRecognizerWrapper(Context context) {
         this(context, false);
@@ -73,20 +104,42 @@ public class FaceMeRecognizerWrapper {
 
         this.cropFaceBitmap = cropFaceBitmap;
 
-        features = new ArrayList<>();
+        savedFaces = new ArrayList<>();
+
+    }
+
+    public void setOnFaceDetect(OnFaceDetect onFaceDetect) {
+        this.onFaceDetect = onFaceDetect;
+    }
+
+
+
+    public FaceMeRecognizerWrapper(Context context, ArrayList<SavedFace> faces, boolean cropFaceBitmap) {
+        this.context = context;
+
+        this.uiSettings = new UiSettings(context);
+
+        this.extractConfig = new ExtractConfig();
+        this.extractConfig.extractBoundingBox = true;
+
+        this.cropFaceBitmap = cropFaceBitmap;
+
+        savedFaces = faces;
 
     }
 
     private void decodeSavedFaces() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<Bitmap> checkList = new ArrayList<>();
-                checkList.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.img_face_1));
-                checkList.add(BitmapFactory.decodeResource(context.getResources(), R.drawable.img_face_2));
+        Toast.makeText(context,"Face List Updated!",Toast.LENGTH_SHORT).show();
 
+        new Thread(() -> {
 
-                for (Bitmap bitmap:checkList){
+            for (SavedFace face:savedFaces){
+                try {
+                    Bitmap bitmap = BitmapFactory.decodeFile(face.getPath());
+
+                    if (bitmap==null){
+                        continue;
+                    }
 
                     if (recognizer == null) {
                         Log.e(TAG, "extractFace but didn't initialize yet");
@@ -100,14 +153,24 @@ public class FaceMeRecognizerWrapper {
                         for (int faceIndex = 0; faceIndex < facesCount; faceIndex++) {
                             FaceFeature faceFeature = recognizer.getFaceFeature(0, faceIndex);
                             FaceAttribute faceAttr = recognizer.getFaceAttribute(0, faceIndex);
-                            features.add(faceFeature);
+
+                            face.setBitmap(bitmap);
+                            face.setFeature(faceFeature);
+                            face.setAttribute(faceAttr);
+
                             Log.e(TAG,faceIndex+" >> age "+faceAttr.age+" | gender "+faceAttr.gender+" | emotion "+faceAttr.emotion);
                         }
                     }
 
-                    Log.e(TAG,"SAVED FACES >> "+features.size());
+                    Log.e(TAG,"SAVED FACES >> "+ savedFaces.size());
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
+
+
+
         }).start();
 
     }
@@ -159,7 +222,6 @@ public class FaceMeRecognizerWrapper {
             featureScheme = recognizer.getFeatureScheme();
             if (featureScheme == null) throw new IllegalStateException("Get feature scheme failed");
 
-            decodeSavedFaces();
 
             Log.i(TAG, "Confidence threshold list");
             Log.i(TAG, " > 1e-6: " + featureScheme.threshold_1_1e6);
@@ -248,21 +310,44 @@ public class FaceMeRecognizerWrapper {
                     }
                 }
 
-                for (int f=0;f<features.size();f++){
-                    float c = compareFaceFeature(features.get(f),faceFeature);
+                boolean isFaceMatched = false;
+
+                for (int f = 0; f< savedFaces.size(); f++){
+                    SavedFace face = savedFaces.get(f);
+
+                    face.getAttribute();
+
+                    if (face.getAttribute()==null){
+                        continue;
+                    }
+
+                    float c = compareFaceFeature(face.getFeature(),faceFeature);
                     Log.e(TAG, "face ["+faceIndex+ "] feature ["+f+"] >> result >> "+c);
 
                     if (c > thr){
+                        if (onFaceDetect != null){
+                            onFaceDetect.onFaceDetect(face);
+                        }
+                        isFaceMatched = true;
                         Log.d(TAG,"Face Result "+f);
                         break;
                     }
 
+                }
+                if (!isFaceMatched){
+                    if (onFaceDetect != null){
+                        onFaceDetect.onFaceNotFound();
+                    }
                 }
 
 
 
                 FaceHolder holder = new FaceHolder(faceInfo, faceLandmark, faceAttr, faceFeature, faceBitmap);
                 faceHolders.add(holder);
+            }
+        }else {
+            if (onFaceDetect != null){
+                onFaceDetect.onFaceNotFound();
             }
         }
         onExtractedListener.onExtracted(bitmap.getWidth(), bitmap.getHeight(), new ArrayList<>(faceHolders));
@@ -374,5 +459,17 @@ public class FaceMeRecognizerWrapper {
         }
 
         return recognizer.getProperty(propertyId);
+    }
+
+    public interface OnSavedFaceListener{
+        void setSavedFaces(ArrayList<SavedFace> faces);
+        ArrayList<SavedFace> getSavedFaces();
+        void addFace(SavedFace face);
+        void removeFace(int index);
+    }
+
+    public interface OnFaceDetect{
+        void onFaceDetect(SavedFace face);
+        void onFaceNotFound();
     }
 }

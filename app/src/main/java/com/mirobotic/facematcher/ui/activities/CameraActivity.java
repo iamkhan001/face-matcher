@@ -5,16 +5,16 @@
  * Copyright (C) 2018 CyberLink Corp. All rights reserved.
  * https://www.cyberlink.com
  */
-package com.mirobotic.facematcher.sdk.camerastream;
+package com.mirobotic.facematcher.ui.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,28 +31,27 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 
-import com.cyberlink.faceme.DetectionMode;
 import com.cyberlink.facemedemo.camera.CameraController;
 import com.cyberlink.facemedemo.camera.CameraFactory;
 import com.cyberlink.facemedemo.camera.StatListener;
+import com.cyberlink.facemedemo.data.SavedFace;
 import com.cyberlink.facemedemo.sdk.FaceHolder;
+import com.cyberlink.facemedemo.sdk.FaceMeRecognizerWrapper;
 import com.cyberlink.facemedemo.sdk.OnExtractedListener;
 import com.cyberlink.facemedemo.ui.AutoFitTextureView;
 import com.cyberlink.facemedemo.ui.BaseActivity;
 import com.cyberlink.facemedemo.ui.CLToast;
 import com.mirobotic.facematcher.R;
+import com.mirobotic.facematcher.sdk.camerastream.RecognitionHandler;
+import com.mirobotic.facematcher.sdk.camerastream.ResolutionFragment;
 import com.mirobotic.facematcher.view.FaceView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class CameraActivity extends BaseActivity implements
         CameraController.Callback,
@@ -60,17 +59,25 @@ public class CameraActivity extends BaseActivity implements
         ResolutionFragment.Broker {
     private static final String TAG = "CameraActivity";
 
-
-    private Handler mainHandler = new Handler();
+    private Context context;
     private RecognitionHandler recognitionHandler;
-
-
+    private FaceMeRecognizerWrapper.OnSavedFaceListener onSavedFaceListener;
     private StatListener statListener;
     private CameraController cameraController;
     private FaceView facesView;
+    private ArrayList<SavedFace> savedFaces;
+    private TextView tvName;
+    private FaceMeRecognizerWrapper.OnFaceDetect onFaceDetect = new FaceMeRecognizerWrapper.OnFaceDetect() {
+        @Override
+        public void onFaceDetect(SavedFace face) {
+            faceMatched(face);
+        }
 
-    private ArrayList<String> savedFaces;
-
+        @Override
+        public void onFaceNotFound() {
+            faceMatched(null);
+        }
+    };
 
     private abstract class BtnClickListener implements View.OnClickListener {
         @Override
@@ -98,16 +105,19 @@ public class CameraActivity extends BaseActivity implements
     @Override
     protected void initialize() {
 
-        getSavedFaces(getApplicationContext());
+        context = CameraActivity.this;
+
+        tvName = findViewById(R.id.tvName);
+
+        getSavedFaces(context);
+        adjustFullscreenMode();
+        initCameraController();
+        initUiComponents();
+
 
         Log.e(TAG,"saved faces >> "+savedFaces.size());
 
-        adjustFullscreenMode();
-        // Initialize Camera controller and related components.
-        initCameraController();
-        // Initialize UI components
-        initUiComponents();
-        // Initialize UI default appearance.
+        findViewById(R.id.imgShowFaces).setOnClickListener(v-> startActivity(new Intent(context,FaceListActivity.class)));
     }
 
     @Override
@@ -192,19 +202,22 @@ public class CameraActivity extends BaseActivity implements
             @Override
             public void onExtracted(int width, int height, @NonNull List<FaceHolder> faces) {
 
-                Log.e(TAG,"face count >> "+faces.size());
+                Log.e(TAG, "face count >> " + faces.size());
 
-                for (FaceHolder face:faces){
-                    Log.e(TAG,face.data.name+" "+face.data.faceId);
-
-
+                for (FaceHolder face : faces) {
+                    Log.e(TAG, face.data.name + " " + face.data.faceId);
 
 
                 }
 
 
             }
-        });
+        }, listener -> {
+            this.onSavedFaceListener = listener;
+            onSavedFaceListener.setSavedFaces(savedFaces);
+
+        },onFaceDetect);
+
     }
 
 
@@ -241,7 +254,6 @@ public class CameraActivity extends BaseActivity implements
 
     @Override
     public void onFaceClick(FaceHolder faceHolder) {
-//        if (true) {
         if (faceHolder == null || !uiSettings.isShowFeatures()) {
             if (!uiSettings.isShowFeatures()) {
                 CLToast.showLong(this, "Enable features extraction to recognize face.");
@@ -270,10 +282,10 @@ public class CameraActivity extends BaseActivity implements
                 .setPositiveButton(forInsertion ? "Insert" : "Update", (dialog, which) -> {
                     String newName = editText.getText().toString().trim();
                     if (!TextUtils.isEmpty(newName)) {
-//                        recognitionHandler.updateFace(faceHolder, newName);
                         if (faceHolder.faceBitmap!=null){
-                            Uri uri = saveImageToInternalStorage(getApplicationContext(),faceHolder.faceBitmap,newName);
+                            Uri uri = saveImageToInternalStorage(context,faceHolder.faceBitmap,newName);
                             Log.e(TAG,"saved to "+uri.getPath());
+                            getSavedFaces(context);
                         }
                     }
                 })
@@ -334,9 +346,23 @@ public class CameraActivity extends BaseActivity implements
                 return;
             }
 
-            for (File file1 : listFile) {
-                savedFaces.add(file1.getAbsolutePath());
+            for (File f : listFile) {
+                String name = new File(f.getPath()).getName();
+
+                if (name.contains("face_")){
+                    name = name.replace("face_","");
+                }
+
+                if (name.contains(".jpg")){
+                    name = name.replace(".jpg","");
+                }
+
+                savedFaces.add(new SavedFace(null,null,null,f.getAbsolutePath(),name));
             }
+        }
+
+        if (onSavedFaceListener!=null){
+            onSavedFaceListener.setSavedFaces(savedFaces);
         }
     }
 
@@ -365,7 +391,15 @@ public class CameraActivity extends BaseActivity implements
         }
     }
 
-
+    private void faceMatched(SavedFace face){
+        runOnUiThread(() ->{
+            if (face==null){
+                tvName.setText("");
+                return;
+            }
+            tvName.setText(face.getName());
+        });
+    }
 
 
     @Override
@@ -383,6 +417,12 @@ public class CameraActivity extends BaseActivity implements
             callback.rejected();
         }
     }
+
+    public interface OnRecognitionHandlerReady{
+        void setOnSavedFaceListener(FaceMeRecognizerWrapper.OnSavedFaceListener listener);
+    }
+
+
 
 
 }

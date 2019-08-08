@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mirobotic.facematcher">
 
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -14,7 +13,6 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,17 +21,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ui.activities.FaceListActivity"></activity>
         <activity android:name=".ui.activities.MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
-
         <activity
-            android:name=".sdk.camerastream.CameraActivity"
+            android:name=".ui.activities.CameraActivity"
             android:configChanges="uiMode|orientation|smallestScreenSize|screenSize|screenLayout"
             android:icon="@mipmap/ic_launcher"
             android:launchMode="singleTask"
@@ -41,6 +40,7 @@
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,10 +52,10 @@
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".sdk.manageface.ManageCollectionsActivity"
             android:configChanges="uiMode|orientation|smallestScreenSize|screenSize|screenLayout"
@@ -64,10 +64,10 @@
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".sdk.manageface.ManageFacesActivity"
             android:configChanges="uiMode|orientation|smallestScreenSize|screenSize|screenLayout"
@@ -76,10 +76,10 @@
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".sdk.validate.ValidationActivity"
             android:configChanges="uiMode|orientation|smallestScreenSize|screenSize|screenLayout"
@@ -87,11 +87,10 @@
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
 
         <provider
             android:name="androidx.core.content.FileProvider"
